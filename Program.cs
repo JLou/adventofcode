@@ -29,12 +29,33 @@ new Day23(),
 new Day24()
 };
 
-var dayWanted = 2;
+int dayWanted = 1;
+if (args.Length == 0 || !int.TryParse(args[0], out dayWanted) || dayWanted < 1 || dayWanted > 24)
+{
+    Console.WriteLine("Invalid day, fallback to 1");
+    dayWanted = 1;
+}
 
 var lines = File.ReadAllLines("./input/" + dayWanted.ToString().PadLeft(2, '0') + ".txt");
+var sampleLines = File.ReadAllLines("./samples/" + dayWanted.ToString().PadLeft(2, '0') + ".txt");
 
 var d = days[dayWanted - 1];
+var (part1S, part2S) = d.Compute(sampleLines);
 var (part1, part2) = d.Compute(lines);
+Console.WriteLine();
+Console.WriteLine();
 
+Console.WriteLine("-------------- SAMPLE ------------------");
+Console.WriteLine("part1 = " + part1S);
+Console.WriteLine("part2 = " + part2S);
+Console.WriteLine("-------------- END SAMPLE --------------");
+Console.WriteLine();
+Console.WriteLine();
+
+Console.WriteLine("---------- PERSONAL RESULT -------------");
 Console.WriteLine("part1 = " + part1);
 Console.WriteLine("part2 = " + part2);
+Console.WriteLine("-------- END PERSONAL RESULT -----------");
+
+Console.WriteLine();
+Console.WriteLine();
