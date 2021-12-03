@@ -1,33 +1,40 @@
-﻿var lines = File.ReadAllLines("./input/1.txt").Select(l => int.Parse(l)).ToList();
+﻿using aoc;
 
 
-int CountIncreases(IEnumerable<int> l)
+var days = new IDay[24]
 {
+new Day01(),
+new Day02(),
+new Day03(),
+new Day04(),
+new Day05(),
+new Day06(),
+new Day07(),
+new Day08(),
+new Day09(),
+new Day10(),
+new Day11(),
+new Day12(),
+new Day13(),
+new Day14(),
+new Day15(),
+new Day16(),
+new Day17(),
+new Day18(),
+new Day19(),
+new Day20(),
+new Day21(),
+new Day22(),
+new Day23(),
+new Day24()
+};
 
-    var prev = int.MaxValue;
-    var count = 0;
+var dayWanted = 2;
 
-    foreach (var line in l)
-    {
-        if (line > prev)
-        {
-            count++;
-        }
-        prev = line;
-    }
+var lines = File.ReadAllLines("./input/" + dayWanted.ToString().PadLeft(2, '0') + ".txt");
 
-    return count;
-}
+var d = days[dayWanted - 1];
+var (part1, part2) = d.Compute(lines);
 
-int[] groups = new int[lines.Count() - 2];
-
-
-for (int i = 0; i < lines.Count(); i++)
-{
-    if (i < lines.Count() - 2) groups[i] += lines[i];
-    if (i - 1 >= 0 && i - 1 < lines.Count() - 2) groups[i - 1] += lines[i];
-    if (i - 2 >= 0 && i < lines.Count()) groups[i - 2] += lines[i];
-}
-Console.WriteLine(CountIncreases(lines));
-Console.WriteLine(CountIncreases(groups));
-
+Console.WriteLine("part1 = " + part1);
+Console.WriteLine("part2 = " + part2);
