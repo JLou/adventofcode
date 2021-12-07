@@ -91,7 +91,7 @@ namespace aoc
                 return (winners[0], winners.Last());
             }
 
-            static int ComputeGridScore(Cell[,]? grid)
+            static int ComputeGridScore(Cell[,] grid)
             {
                 int sum = 0;
                 foreach (var cell in grid)
