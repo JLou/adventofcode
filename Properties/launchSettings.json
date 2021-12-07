@@ -2,7 +2,7 @@
   "profiles": {
     "aoc": {
       "commandName": "Project",
-      "commandLineArgs": "5"
+      "commandLineArgs": "6"
     }
   }
 }
