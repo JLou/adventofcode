@@ -21,7 +21,7 @@ namespace aoc
 
             var initialFishes = input[0].Split(',').Select(x => i + 7 - 1 - Convert.ToInt32(x));
 
-            var c = 0l;
+            var c = 0L;
             foreach (var f in initialFishes)
             {
                 c += HowManyOffspring(f);
