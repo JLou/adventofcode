@@ -45,8 +45,8 @@ namespace aoc
                 if (i == emptyLine + 1) p1 = set.Count;
             }
 
-            var maxX = set.Select(p => p.x).Max();
-            var maxy = set.Select(p => p.y).Max();
+            var maxX = set.Max(p => p.x);
+            var maxy = set.Max(p => p.y);
 
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine();
@@ -56,7 +56,7 @@ namespace aoc
                 {
                     if (set.Contains(new Point(x, y)))
                     {
-                        stringBuilder.Append("▓");
+                        stringBuilder.Append('▓');
                     }
                     else
                     {
