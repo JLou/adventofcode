@@ -29,11 +29,11 @@ new Day23(),
 new Day24()
 };
 
-int dayWanted = 1;
+int dayWanted = 18;
 if (args.Length == 0 || !int.TryParse(args[0], out dayWanted) || dayWanted < 1 || dayWanted > 24)
 {
     Console.WriteLine("Invalid day, fallback to 1");
-    dayWanted = 1;
+    dayWanted = 18;
 }
 
 var lines = File.ReadAllLines("./input/" + dayWanted.ToString().PadLeft(2, '0') + ".txt");
