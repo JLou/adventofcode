@@ -1,4 +1,4 @@
-with open("C:/dev/adventofcode/2023/inputs/01", 'r') as f:
+with open("./inputs/01", 'r') as f:
     lines = f.readlines()
 
 # lines= """1abc2
