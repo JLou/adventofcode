@@ -1,5 +1,4 @@
-from collections import defaultdict, deque
-import queue
+from collections import deque
 import re
 
 with open("./inputs/05", 'r') as f:
@@ -55,33 +54,6 @@ def get_mapping(mapping: list[list[int]], key: int):
     return key
 
 
-seed_to_soil = []
-soil_to_fertilizer = []
-fertilizer_to_water = []
-water_to_light = []
-light_to_temperature = []
-temperature_to_humidity = []
-humidity_to_location = []
-
-seeds = list(map(int, re.findall(r'\d+', lines[0])))
-
-maps = [seed_to_soil, soil_to_fertilizer, fertilizer_to_water, water_to_light,
-        light_to_temperature, temperature_to_humidity, humidity_to_location]
-
-for curr_map, data in zip(maps, lines[1:]):
-    curr_map += parse(data)
-
-
-res = float('inf')
-
-
-# for seed in seeds:
-#     location = get_mapping(humidity_to_location, get_mapping(temperature_to_humidity, get_mapping(light_to_temperature, get_mapping(
-#         water_to_light, get_mapping(fertilizer_to_water, get_mapping(soil_to_fertilizer, get_mapping(seed_to_soil, seed)))))))
-#     res = min(location, res)
-
-# print(res)
-
 def get_seed_ranges(seeds):
     return [[s, s+range] for s, range in zip(seeds[::2], seeds[1::2])]
 
@@ -134,45 +106,35 @@ def get_range_mapping(ranges, mapping):
     return new_ranges
 
 
+seed_to_soil = []
+soil_to_fertilizer = []
+fertilizer_to_water = []
+water_to_light = []
+light_to_temperature = []
+temperature_to_humidity = []
+humidity_to_location = []
+
+seeds = list(map(int, re.findall(r'\d+', lines[0])))
+
+maps = [seed_to_soil, soil_to_fertilizer, fertilizer_to_water, water_to_light,
+        light_to_temperature, temperature_to_humidity, humidity_to_location]
+
+for curr_map, data in zip(maps, lines[1:]):
+    curr_map += parse(data)
+
+
+res = float('inf')
+
+for seed in seeds:
+    location = get_mapping(humidity_to_location, get_mapping(temperature_to_humidity, get_mapping(light_to_temperature, get_mapping(
+        water_to_light, get_mapping(fertilizer_to_water, get_mapping(soil_to_fertilizer, get_mapping(seed_to_soil, seed)))))))
+    res = min(location, res)
+
+print("---------------- PART 1 ----------------\n", res)
+
 ranges = get_seed_ranges(seeds)
 for mapping in maps:
     ranges = get_range_mapping(ranges, mapping)
 
-print(min([start for start, end in ranges]))
-
-
-# new_ranges = []
-# for s, range in zip(seeds[::2], seeds[1::2]):
-#     e = s + range
-#     current_ranges = deque()
-#     current_ranges.append([s, e])
-#     while len(current_ranges) > 0:
-#         start, end = current_ranges.popleft()
-#         has_changed = False
-#         for destination_start, source_start, length in seed_to_soil:
-#             source_end = source_start + length
-#             if start < source_start and end > source_end:
-#                 new_ranges.append([get_mapping(seed_to_soil, source_start), get_mapping(
-#                     seed_to_soil, source_end)])
-#                 current_ranges.append([start, source_start - 1])
-#                 current_ranges.append([source_end + 1, end])
-#                 has_changed = True
-#             elif start >= source_start and end <= source_end:
-#                 new_ranges.append([get_mapping(seed_to_soil, start), get_mapping(
-#                     seed_to_soil, end)])
-#                 has_changed = True
-#             elif source_start >= start and source_start < end:
-#                 new_ranges.append([get_mapping(seed_to_soil, source_start), get_mapping(
-#                     seed_to_soil, min(end, source_end))])
-#                 current_ranges.append([start, source_start - 1])
-#                 has_changed = True
-#             elif start >= source_start and start < source_end:
-#                 new_ranges.append([get_mapping(seed_to_soil, start), get_mapping(
-#                     seed_to_soil, min(end, source_end))])
-#                 current_ranges.append([source_end + 1, end])
-#                 has_changed = True
-
-#             if has_changed:
-#                 break
-#         if not has_changed:
-#             new_ranges.append([start, end])
+print("---------------- PART 2 ----------------\n",
+      min([start for start, _ in ranges]))
