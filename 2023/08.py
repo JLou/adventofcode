@@ -60,7 +60,6 @@ def count(start, is_part1=False):
 
 print("PART 1:", count("AAA", True))
 
-
 start_nodes = list(filter(lambda x: x.endswith("A"), node_dict.keys()))
 counts = [count(x) for x in start_nodes]
 ppcm = math.lcm(*counts)
