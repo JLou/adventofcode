@@ -39,16 +39,8 @@ page_updates = [list(map(int, update.split(",")))
                 for update in updates.splitlines()]
 
 map_orders = defaultdict(list)
-pages = set()
-final_order = []
 for left, right in page_orders:
     map_orders[left].append(right)
-    pages.add(left)
-    pages.add(right)
-
-for page in pages:
-    if page not in map_orders:
-        map_orders[page] = []
 
 
 def is_valid_order(update, order_map):
